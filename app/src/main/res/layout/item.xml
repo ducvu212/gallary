@@ -9,8 +9,5 @@
         android:id="@+id/image_im"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_144"
-        android:scaleType="fitXY"
-        />
-
+        android:scaleType="fitXY"/>
 </LinearLayout>
-

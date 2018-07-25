@@ -24,7 +24,7 @@ import static com.example.ducvu212.gallary.MainActivity.sPaths;
 public class GridFragment extends Fragment implements IList {
 
     private ImageAdapter mAdapterImage;
-    private ArrayList<ItemImage> mItemArrayList;
+    private ArrayList<Image> mItemArrayList;
     private RecyclerView mRecyclerView;
     private int mFirstItem = 0;
 
@@ -55,8 +55,9 @@ public class GridFragment extends Fragment implements IList {
     }
 
     private void addData() {
-        for (int i = mFirstItem; i < mFirstItem + 10; i++) {
-            mItemArrayList.add(new ItemImage(sPaths.get(i)));
+        int itemHold = 10;
+        for (int i = mFirstItem; i < mFirstItem + itemHold; i++) {
+            mItemArrayList.add(new Image(sPaths.get(i)));
         }
         mFirstItem = mItemArrayList.size() - 1;
     }
@@ -93,12 +94,16 @@ public class GridFragment extends Fragment implements IList {
     }
 
     @Override
-    public ItemImage getItem(int position) {
+    public Image getItem(int position) {
         return mItemArrayList.get(position);
     }
 
     @Override
     public int getItemCount() {
-        return mItemArrayList.size();
+        if (mItemArrayList == null) {
+            return 0;
+        }else {
+            return mItemArrayList.size();
+        }
     }
 }

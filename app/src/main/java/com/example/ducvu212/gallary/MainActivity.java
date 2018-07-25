@@ -13,7 +13,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -33,14 +32,12 @@ public class MainActivity extends AppCompatActivity {
         initComponents();
         if (mIsSdCard) {
             loadImages(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            loadImages(MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        } else {
-            loadImages(MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         }
+        loadImages(MediaStore.Images.Media.INTERNAL_CONTENT_URI);
     }
 
     private ArrayList<String> loadImages(Uri uri) {
-        final String[] columns = {MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID};
+        final String[] columns = { MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID };
         final String orderBy = MediaStore.Images.Media.DATE_ADDED;
         Cursor cursor = getContentResolver().query(uri, columns, null, null, orderBy);
         int count = cursor.getCount();
@@ -56,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initComponents() {
-        mIsSdCard = android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
+        mIsSdCard = android.os.Environment.getExternalStorageState()
+                .equals(android.os.Environment.MEDIA_MOUNTED);
         sPaths = new ArrayList<>();
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
@@ -70,8 +68,11 @@ public class MainActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void checkPermissions() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, READ_STORAGE_PERMISSION);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[] { Manifest.permission.READ_EXTERNAL_STORAGE },
+                    READ_STORAGE_PERMISSION);
         }
     }
 }
